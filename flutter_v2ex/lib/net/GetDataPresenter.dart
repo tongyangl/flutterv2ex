@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_v2ex/StringData.dart';
 import 'package:flutter_v2ex/modle/FeedDetailData.dart';
 import 'package:flutter_v2ex/modle/FeedItemData.dart';
+import 'package:flutter_v2ex/modle/NodesItemData.dart';
 import 'package:html/dom.dart';
 import 'package:html2md/html2md.dart' as html2md;
 import 'package:html/parser.dart' show parse;
@@ -110,9 +113,14 @@ void main() {
     return data;
   }
 
-  getNodsList() async {
+  Future<List<NodesItemData>> getNodsList() async {
     String _url = StringData.baseUrl + "api/nodes/all.json";
     Response response = await dio.get(_url);
-    JSON.decode(response.data.toString());
+    List mlist = response.data;
+
+    List<NodesItemData> list = new List();
+
+    list = mlist.map((m) => new NodesItemData.formJson(m)).toList();
+    return list;
   }
 }
