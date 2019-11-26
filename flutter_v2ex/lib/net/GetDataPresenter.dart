@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_v2ex/StringData.dart';
 import 'package:flutter_v2ex/modle/FeedDetailData.dart';
 import 'package:flutter_v2ex/modle/FeedItemData.dart';
@@ -8,6 +10,7 @@ import 'package:flutter_v2ex/modle/NodesItemData.dart';
 import 'package:html/dom.dart';
 import 'package:html2md/html2md.dart' as html2md;
 import 'package:html/parser.dart' show parse;
+import 'package:path_provider/path_provider.dart';
 
 class GetDataPresenter {
   Dio dio = Dio();
@@ -122,5 +125,23 @@ void main() {
 
     list = mlist.map((m) => new NodesItemData.formJson(m)).toList();
     return list;
+  }
+
+  Future<List<NodesItemData>> getLocalNodeList() async {
+    String text;
+
+       text =await rootBundle.loadString('assets/nodes.txt');
+      print(text);
+
+   //   final file = File('${directory.path}/lib/modle/nodes');
+     // text = await file.readAsString();
+      print(text);
+      List mlist = json.decode(text);
+
+      List<NodesItemData> list = new List();
+
+      list = mlist.map((m) => new NodesItemData.formJson(m)).toList();
+      return list;
+
   }
 }

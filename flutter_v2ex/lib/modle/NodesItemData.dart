@@ -9,11 +9,11 @@ class NodesItemData {
   int topics;
 
   NodesItemData.formJson(Map<String, dynamic> jsonMap)
-      : avatar_large = jsonMap['avatar_large'],
+      : avatar_large = "https:"+jsonMap['avatar_large'],
         name = jsonMap['name'],
         title = jsonMap['title'],
-        avatar_normal = jsonMap['avatar_normal'],
-        avatar_mini = jsonMap['avatar_mini'],
+        avatar_normal = "https:"+jsonMap['avatar_normal'],
+        avatar_mini = "https:"+jsonMap['avatar_mini'],
         url = jsonMap['url'],
         stars = jsonMap['stars'],
         topics = jsonMap['topics'];
