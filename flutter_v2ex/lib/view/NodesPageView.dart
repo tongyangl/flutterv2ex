@@ -46,6 +46,12 @@ class _NodesPageView extends State<NodesPageView>
       crossAxisCount: 8,
       itemCount: _list.length,
       itemBuilder: (BuildContext context, int index) => Container(
+        decoration: BoxDecoration(
+          color: Colors.grey,
+          borderRadius: BorderRadius.all(
+            Radius.circular(10.0),
+          ),
+        ),
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
