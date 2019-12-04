@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_v2ex/StringData.dart';
 import 'package:flutter_v2ex/modle/FeedDetailData.dart';
 import 'package:flutter_v2ex/modle/FeedItemData.dart';
+import 'package:flutter_v2ex/modle/NodeItemData.dart';
 import 'package:flutter_v2ex/modle/NodesItemData.dart';
 import 'package:html/dom.dart';
 import 'package:html2md/html2md.dart' as html2md;
@@ -130,18 +131,45 @@ void main() {
   Future<List<NodesItemData>> getLocalNodeList() async {
     String text;
 
-       text =await rootBundle.loadString('assets/nodes.txt');
-      print(text);
+    text = await rootBundle.loadString('assets/nodes.txt');
+    print(text);
 
-   //   final file = File('${directory.path}/lib/modle/nodes');
-     // text = await file.readAsString();
-      print(text);
-      List mlist = json.decode(text);
+    //   final file = File('${directory.path}/lib/modle/nodes');
+    // text = await file.readAsString();
+    print(text);
+    List mlist = json.decode(text);
 
-      List<NodesItemData> list = new List();
+    List<NodesItemData> list = new List();
 
-      list = mlist.map((m) => new NodesItemData.formJson(m)).toList();
-      return list;
+    list = mlist.map((m) => new NodesItemData.formJson(m)).toList();
+    return list;
+  }
 
+  Future<List<NodeItemData>> getHomePageNodesList() async {
+    String url = StringData.baseUrl;
+    print(url);
+    Response response = await dio.get(url);
+    Document document = parse(response.data.toString());
+    List<NodeItemData> result = new List();
+    List<Element> list = document
+        .getElementById('Main')
+        .getElementsByClassName('box')[1]
+        .getElementsByClassName('cell');
+    for (int i = 1; i < list.length; i++) {
+      NodeItemData nodesItemData = new NodeItemData();
+      nodesItemData.title = list[i].getElementsByClassName('fade')[0].text;
+      List<Element> subList = list[i].querySelectorAll('a');
+      List<NodeData> nodeList = new List();
+      for (int i = 0; i < subList.length; i++) {
+        NodeData data = new NodeData();
+        data.name = subList[i].text;
+        data.url = subList[i].attributes['href'];
+        nodeList.add(data);
+        print(data.url);
+      }
+      nodesItemData.list = nodeList;
+      result.add(nodesItemData);
+    }
+    return result;
   }
 }
