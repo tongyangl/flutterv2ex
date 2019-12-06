@@ -45,19 +45,29 @@ class _NodeItemView extends State<NodeItemView> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return new Container(
-        child:
-            /*new Row(
+      margin: EdgeInsets.only(left: 5, right: 5, top: 5, bottom: 5),
+      child: new Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(data.title),*/
-            Wrap(
-      direction: Axis.horizontal,
-      spacing: 10,
-      runSpacing: 10,
-      alignment: WrapAlignment.start,
-      children: _widgetList,
-    )
-        //   ],
-        //    ),
-        );
+          Container(
+            margin: EdgeInsets.only(bottom: 5),
+            child: Text(
+              data.title,
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+          Wrap(
+            direction: Axis.horizontal,
+            spacing: 10,
+            runSpacing: 10,
+            alignment: WrapAlignment.start,
+            children: _widgetList,
+          )
+        ],
+      ),
+    );
   }
 }
