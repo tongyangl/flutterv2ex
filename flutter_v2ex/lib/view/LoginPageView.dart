@@ -25,25 +25,40 @@ class _LoginPageView extends State<LoginPageView> {
     return new MaterialApp(
       home: Scaffold(
         body: Container(
-          child: Form(
-              child: Column(
-            children: <Widget>[
-              TextFormField(
-                  autofocus: false,
-                  keyboardType: TextInputType.number,
-                  //键盘回车键的样式
-                  textInputAction: TextInputAction.next,
-                  controller: _userNameController,
-                  decoration: InputDecoration(
-                      labelText: "用户名或邮箱",
-                      hintText: "用户名或邮箱",
-                      icon: Icon(Icons.person)),
-                  // 校验用户名
-                  validator: (v) {
-                    return v.trim().length > 0 ? null : "用户名不能为空";
-                  }),
-            ],
-          )),
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Form(
+                          child: Column(
+                        children: <Widget>[
+                          TextFormField(
+                              autofocus: false,
+                              keyboardType: TextInputType.number,
+                              //键盘回车键的样式
+                              textInputAction: TextInputAction.next,
+                              controller: _userNameController,
+                              decoration: InputDecoration(
+                                  labelText: "用户名或邮箱",
+                                  hintText: "用户名或邮箱",
+                                  icon: Icon(Icons.person)),
+                              // 校验用户名
+                              validator: (v) {
+                                return v.trim().length > 0 ? null : "用户名不能为空";
+                              }),
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
         ),
       ),
     );

@@ -65,7 +65,7 @@ class _MyHomePageState extends State<MyHomePage>
     _pageList = [
       FeedsPageView(context),
       NodesPageView(context),
-      PersonInfoPageView(),
+      PersonInfoPageView(context),
       ReplyPageView()
     ];
     return new Scaffold(
