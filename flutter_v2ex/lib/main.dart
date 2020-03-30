@@ -44,20 +44,20 @@ class _MyHomePageState extends State<MyHomePage>
   int currentIndex = 0;
   GlobalKey _bottomNavigationKey = GlobalKey();
   int _page = 0;
-  List<Widget> _pageList ;
+  List<Widget> _pageList;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
 
-    _controller = TabController(vsync: this, length: 4)..addListener((){
-      setState(() {
-        currentIndex=_controller.index;
+    _controller = TabController(vsync: this, length: 4)
+      ..addListener(() {
+        setState(() {
+          currentIndex = _controller.index;
+        });
       });
-    });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -65,8 +65,8 @@ class _MyHomePageState extends State<MyHomePage>
     _pageList = [
       FeedsPageView(context),
       NodesPageView(context),
+      ReplyPageView(),
       PersonInfoPageView(context),
-      ReplyPageView()
     ];
     return new Scaffold(
       bottomNavigationBar: CurvedNavigationBar(
@@ -81,16 +81,15 @@ class _MyHomePageState extends State<MyHomePage>
         ],
         onTap: (index) {
           setState(() {
-            currentIndex=index;
+            currentIndex = index;
           });
-          _controller.animateTo(index,duration: Duration(milliseconds: 300), curve: Curves.ease);
+          _controller.animateTo(index,
+              duration: Duration(milliseconds: 300), curve: Curves.ease);
         },
       ),
-
       body: TabBarView(
         controller: _controller,
         children: _pageList,
-
       ),
 
       /* body: new CupertinoTabScaffold(

@@ -105,15 +105,14 @@ void main() {
     List<Element> e = document.getElementsByClassName("markdown_body");
 
     if (e.length > 0) {
+      print( e[0].innerHtml);
       data.content = e[0].text;
-      print(e[0].text);
     }
 
     List<Element> subList = document.getElementsByClassName("subtle");
     for (int i = 0; i < subList.length; i++) {
-      data.subContent.add(subList[i].text);
+      data.subContent.add(subList[i].getElementsByClassName("topic_content")[0].innerHtml);
     }
-    print(html2md.convert(html));
     return data;
   }
 
